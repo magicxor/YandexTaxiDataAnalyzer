@@ -286,3 +286,6 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+YandexTaxiDataAnalyzer.Cli.NetCore/appsettings.json
+YandexTaxiDataAnalyzer.Cli.NetCore/yandex-taxi-stats.json
+YandexTaxiDataAnalyzer.Visualization/yandex-taxi-stats.json
