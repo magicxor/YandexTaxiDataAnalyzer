@@ -7,6 +7,7 @@ A simple tool for Yandex.Taxi report parsing and visualization
 dotnet publish -r win10-x64 -c Release
 ```
 or download binary files.
+
 2. Create appsettings.json file with your data:
 ```
 {
