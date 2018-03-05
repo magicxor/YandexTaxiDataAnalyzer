@@ -4,7 +4,7 @@
 
 function addSingleValue(divId, caption, value) {
     createRow(divId);
-    $("#divName").append('<b>' + caption + ': ' + value + '</b>');
+    $('#' + divId).append('<p class="text-center"><b>' + caption + ': ' + value + '</b></p>');
 }
 
 function renderAsColumnChart(divId, chartName, data) {
