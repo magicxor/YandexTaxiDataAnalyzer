@@ -24,7 +24,7 @@ namespace YandexTaxiDataAnalyzer.Core
             var htmlMessages = _imapService.GetHtmlMessages();
             return _htmlParserService.ParseHtmlMessages(htmlMessages);
         }
-        
+
         public string GetStatistics()
         {
             var data = GetData();
@@ -76,11 +76,13 @@ namespace YandexTaxiDataAnalyzer.Core
             var firstNameFrequency = firstNameFrequencyData.OrderByDescending(item => item.Count).Select(item => new { name = item.Key, y = item.Count }).ToList();
             var patronymicFrequency = patronymicFrequencyData.OrderByDescending(item => item.Count).Select(item => new { name = item.Key, y = item.Count }).ToList();
 
-            var totalDuration = data.Sum(item => item.OrderInformation.Duration.TotalMinutes);
-            var medianDuration = data.Select(item => item.OrderInformation.Duration.TotalMinutes).Median();
+            var totalDuration = TimeSpan.FromMinutes(data.Sum(item => item.OrderInformation.Duration.TotalMinutes)).ToString();
+            var medianDuration = TimeSpan.FromMinutes(data.Select(item => item.OrderInformation.Duration.TotalMinutes).Median()).ToString();
             var totalRideCount = data.Count;
+            var totalCost = data.Sum(item => item.OrderInformation.Cost) + " ₽";
+            var medianCost = data.Where(item => item.OrderInformation.Cost.HasValue).Select(item => item.OrderInformation.Cost ?? 0).Median() + " ₽";
             var totalUniqueWaypointCount = data.SelectMany(item => item.RouteInformation.Waypoints).Distinct().Count();
-            
+
             var summary = new
             {
                 rideCountByCompany,
@@ -99,6 +101,8 @@ namespace YandexTaxiDataAnalyzer.Core
                 totalDuration,
                 medianDuration,
                 totalRideCount,
+                totalCost,
+                medianCost,
                 totalUniqueWaypointCount
             };
             return JsonConvert.SerializeObject(summary);
