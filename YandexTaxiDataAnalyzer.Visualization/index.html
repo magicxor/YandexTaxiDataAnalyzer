@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Yandex Taxi Data Analyzer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" crossorigin="anonymous" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/highcharts.js" crossorigin="anonymous" integrity="sha256-F0xKYvUdYPCgKKgKGtEjxwHXKSRbwKP+2mOlgGoR0Fs="></script>
+    <script src="ChartsRender.js"></script>
+</head>
+<body>
+
+<script>
+    $(function () {
+        $('#process-button').click(function () {
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                var text = reader.result.toString();
+                var json = JSON.parse(text);
+                renderAsPieChart('statsVisualization1', 'rideCountByCompany', json.rideCountByCompany);
+                renderAsPieChart('statsVisualization2', 'rideCountByCarColor', json.rideCountByCarColor);
+                renderAsPieChart('statsVisualization3', 'rideCountByCarModel', json.rideCountByCarModel);
+                renderAsPieChart('statsVisualization4', 'rideCountByCarAndDriver', json.rideCountByCarAndDriver);
+
+                renderAsPieChart('statsVisualization5', 'totalCostByMinutes', json.totalCostByMinutes);
+                renderAsPieChart('statsVisualization6', 'rideCountByMinutes', json.rideCountByMinutes);
+
+                renderAsPieChart('statsVisualization7', 'totalCostByHourOfDay', json.totalCostByHourOfDay);
+                renderAsPieChart('statsVisualization8', 'rideCountByHourOfDay', json.rideCountByHourOfDay);
+
+                renderAsColumnChart('statsVisualization9','medianCostByWaypointCount',json.medianCostByWaypointCount);
+                renderAsPieChart('statsVisualization10', 'rideCountByWaypointCount', json.rideCountByWaypointCount);
+
+                renderAsPieChart('statsVisualization11', 'firstNameFrequency', json.firstNameFrequency);
+                renderAsPieChart('statsVisualization12', 'lastNameFrequency', json.lastNameFrequency);
+                renderAsPieChart('statsVisualization13', 'patronymicFrequency', json.patronymicFrequency);
+
+                addSingleValue('statsVisualization14', 'totalDuration', json.totalDuration);
+                addSingleValue('statsVisualization15', 'medianDuration', json.medianDuration);
+                addSingleValue('statsVisualization16', 'totalRideCount', json.totalRideCount);
+                addSingleValue('statsVisualization17', 'totalUniqueWaypointCount', json.totalUniqueWaypointCount);
+            };
+
+            var file = document.getElementById('file-input').files[0];
+            reader.readAsText(file);
+        });
+    });
+</script>
+
+<div id="container" class="container-fluid">
+    <hr/>
+    <div class="row">
+        <div class="mx-auto">
+            <div class="form-group">
+                <input id="file-input" accept=".json" type="file">
+            </div>
+            <button id="process-button" class="btn btn-primary">Process</button>
+        </div>
+    </div>
+    <hr/>
+</div>
+</body>
+</html>

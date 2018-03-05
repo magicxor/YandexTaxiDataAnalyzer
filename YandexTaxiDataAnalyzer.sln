@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YandexTaxiDataAnalyzerTests", "YandexTaxiDataAnalyzerTests\YandexTaxiDataAnalyzerTests.csproj", "{A87B85F9-E71E-4177-84EB-97299E183F08}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YandexTaxiDataAnalyzer.Cli.NetCore", "YandexTaxiDataAnalyzer.Cli.NetCore\YandexTaxiDataAnalyzer.Cli.NetCore.csproj", "{FEE6051D-C10D-446D-9F56-0D5FA34C4707}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YandexTaxiDataAnalyzer.Core", "YandexTaxiDataAnalyzer.Core\YandexTaxiDataAnalyzer.Core.csproj", "{3396B379-BCEA-40A6-91A3-5EE9AC9CC494}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A87B85F9-E71E-4177-84EB-97299E183F08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A87B85F9-E71E-4177-84EB-97299E183F08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A87B85F9-E71E-4177-84EB-97299E183F08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A87B85F9-E71E-4177-84EB-97299E183F08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEE6051D-C10D-446D-9F56-0D5FA34C4707}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEE6051D-C10D-446D-9F56-0D5FA34C4707}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEE6051D-C10D-446D-9F56-0D5FA34C4707}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEE6051D-C10D-446D-9F56-0D5FA34C4707}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3396B379-BCEA-40A6-91A3-5EE9AC9CC494}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3396B379-BCEA-40A6-91A3-5EE9AC9CC494}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3396B379-BCEA-40A6-91A3-5EE9AC9CC494}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3396B379-BCEA-40A6-91A3-5EE9AC9CC494}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {28124771-9084-4D72-A87B-4048E1F80356}
+	EndGlobalSection
+EndGlobal
