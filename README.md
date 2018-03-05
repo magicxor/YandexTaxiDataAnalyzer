@@ -22,3 +22,6 @@ or download binary files.
 ```
 3. Run YandexTaxiDataAnalyzer.Cli.NetCore.exe
 4. Copy yandex-taxi-stats.json to YandexTaxiDataAnalyzer.Visualization directory and open index.html
+
+## Screenshot
+![screenshot](https://raw.githubusercontent.com/magicxor/YandexTaxiDataAnalyzer/img/scr.png)
