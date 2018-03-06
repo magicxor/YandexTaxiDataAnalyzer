@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Newtonsoft.Json;
 using YandexTaxiDataAnalyzer.Core.Extensions;
@@ -36,6 +37,11 @@ namespace YandexTaxiDataAnalyzer.Core
             var costByMinutes = dataAnalyzer.GetStatistics(data, item => item.OrderInformation.Duration.TotalMinutes, item => item.OrderInformation.Cost);
             var costByHourOfDay = dataAnalyzer.GetStatistics(data, item => item.RouteInformation.OrderDateTime.TimeOfDay.Hours, item => item.OrderInformation.Cost);
             var costByWaypointCount = dataAnalyzer.GetStatistics(data, item => item.RouteInformation.Waypoints.Count, item => item.OrderInformation.Cost);
+
+            var costByDate = dataAnalyzer.GetStatistics(data, item => item.RouteInformation.OrderDateTime.Date, item => item.OrderInformation.Cost);
+            var costByMonth = dataAnalyzer.GetStatistics(data, item => new DateTime(item.RouteInformation.OrderDateTime.Date.Year, item.RouteInformation.OrderDateTime.Date.Month, 1), item => item.OrderInformation.Cost);
+            var costByYear = dataAnalyzer.GetStatistics(data, item => item.RouteInformation.OrderDateTime.Year, item => item.OrderInformation.Cost);
+
             var lastNames = data
                 .Select(item => item.ContractorInformation.Driver)
                 .Distinct()
@@ -72,6 +78,15 @@ namespace YandexTaxiDataAnalyzer.Core
             var medianCostByWaypointCount = costByWaypointCount.OrderByDescending(item => item.Median).Select(item => new { name = item.Key, y = item.Median }).ToList();
             var rideCountByWaypointCount = costByWaypointCount.OrderByDescending(item => item.Count).Select(item => new { name = item.Key, y = item.Count }).ToList();
 
+            var totalCostByDate = costByDate.OrderBy(item => item.Key).Select(item => new { name = item.Key.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture), y = item.Sum }).ToList();
+            var rideCountByDate = costByDate.OrderBy(item => item.Key).Select(item => new { name = item.Key.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture), y = item.Count }).ToList();
+
+            var totalCostByMonth = costByMonth.OrderBy(item => item.Key).Select(item => new { name = item.Key.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US")), y = item.Sum }).ToList();
+            var rideCountByMonth = costByMonth.OrderBy(item => item.Key).Select(item => new { name = item.Key.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US")), y = item.Count }).ToList();
+
+            var totalCostByYear = costByYear.OrderBy(item => item.Key).Select(item => new { name = item.Key, y = item.Sum }).ToList();
+            var rideCountByYear = costByYear.OrderBy(item => item.Key).Select(item => new { name = item.Key, y = item.Count }).ToList();
+            
             var lastNameFrequency = lastNameFrequencyData.OrderByDescending(item => item.Count).Select(item => new { name = item.Key, y = item.Count }).ToList();
             var firstNameFrequency = firstNameFrequencyData.OrderByDescending(item => item.Count).Select(item => new { name = item.Key, y = item.Count }).ToList();
             var patronymicFrequency = patronymicFrequencyData.OrderByDescending(item => item.Count).Select(item => new { name = item.Key, y = item.Count }).ToList();
@@ -95,6 +110,12 @@ namespace YandexTaxiDataAnalyzer.Core
                 rideCountByHourOfDay,
                 medianCostByWaypointCount,
                 rideCountByWaypointCount,
+                totalCostByDate,
+                rideCountByDate,
+                totalCostByMonth,
+                rideCountByMonth,
+                totalCostByYear,
+                rideCountByYear,
                 lastNameFrequency,
                 firstNameFrequency,
                 patronymicFrequency,

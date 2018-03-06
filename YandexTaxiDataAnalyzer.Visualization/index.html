@@ -33,6 +33,10 @@
                 renderAsColumnChart('statsVisualization9','medianCostByWaypointCount',json.medianCostByWaypointCount);
                 renderAsPieChart('statsVisualization10', 'rideCountByWaypointCount', json.rideCountByWaypointCount);
 
+                renderAsColumnChart('statsVisualizationCostByDate', 'totalCostByDate', json.totalCostByDate);
+                renderValueAndCountColumnChart('statsVisualizationCostByMonth', 'totalCostByMonth', 'rideCountByMonth', json.totalCostByMonth, json.rideCountByMonth);
+                renderValueAndCountColumnChart('statsVisualizationCostByYear', 'totalCostByYear', 'rideCountByYear', json.totalCostByYear, json.rideCountByYear);
+
                 renderAsPieChart('statsVisualization11', 'firstNameFrequency', json.firstNameFrequency);
                 renderAsPieChart('statsVisualization12', 'lastNameFrequency', json.lastNameFrequency);
                 renderAsPieChart('statsVisualization13', 'patronymicFrequency', json.patronymicFrequency);
