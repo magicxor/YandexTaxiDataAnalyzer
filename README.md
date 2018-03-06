@@ -16,12 +16,13 @@ or download binary files.
     "ImapPort": 993,
     "ImapLogin": "test@test.com",
     "ImapPassword": "password",
-    "LogDirectoryName": "logs"
+    "LogDirectoryName": "logs",
+	"OutputFileName": "yandex-taxi-stats.json"
   }
 }
 ```
 3. Run YandexTaxiDataAnalyzer.Cli.NetCore.exe
 4. Copy yandex-taxi-stats.json to YandexTaxiDataAnalyzer.Visualization directory and open index.html
 
-## Screenshot
+## Screenshots
 ![screenshot](https://raw.githubusercontent.com/magicxor/YandexTaxiDataAnalyzer/img/scr.png)
