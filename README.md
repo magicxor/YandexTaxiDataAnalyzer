@@ -17,7 +17,7 @@ or download binary files.
     "ImapLogin": "test@test.com",
     "ImapPassword": "password",
     "LogDirectoryName": "logs",
-	"OutputFileName": "yandex-taxi-stats.json"
+    "OutputFileName": "yandex-taxi-stats.json"
   }
 }
 ```
