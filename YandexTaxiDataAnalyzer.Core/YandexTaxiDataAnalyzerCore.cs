@@ -69,14 +69,14 @@ namespace YandexTaxiDataAnalyzer.Core
             var rideCountByCarModel = minutesByCarModel.OrderByDescending(item => item.Count).Select(item => new { name = item.Key, y = item.Count }).ToList();
             var rideCountByCarAndDriver = minutesByCarAndDriver.Where(item => item.Count > 1).OrderByDescending(item => item.Count).Select(item => new { name = item.Key, y = item.Count }).ToList();
 
-            var totalCostByMinutes = costByMinutes.OrderByDescending(item => item.Sum).Select(item => new { name = item.Key, y = item.Sum }).ToList();
-            var rideCountByMinutes = costByMinutes.OrderByDescending(item => item.Count).Select(item => new { name = item.Key, y = item.Count }).ToList();
+            var totalCostByMinutes = costByMinutes.OrderBy(item => item.Key).Select(item => new { name = item.Key, y = item.Sum }).ToList();
+            var rideCountByMinutes = costByMinutes.OrderBy(item => item.Key).Select(item => new { name = item.Key, y = item.Count }).ToList();
 
-            var totalCostByHourOfDay = costByHourOfDay.OrderByDescending(item => item.Sum).Select(item => new { name = item.Key, y = item.Sum }).ToList();
-            var rideCountByHourOfDay = costByHourOfDay.OrderByDescending(item => item.Count).Select(item => new { name = item.Key, y = item.Count }).ToList();
+            var totalCostByHourOfDay = costByHourOfDay.OrderBy(item => item.Key).Select(item => new { name = item.Key, y = item.Sum }).ToList();
+            var rideCountByHourOfDay = costByHourOfDay.OrderBy(item => item.Key).Select(item => new { name = item.Key, y = item.Count }).ToList();
 
-            var medianCostByWaypointCount = costByWaypointCount.OrderByDescending(item => item.Median).Select(item => new { name = item.Key, y = item.Median }).ToList();
-            var rideCountByWaypointCount = costByWaypointCount.OrderByDescending(item => item.Count).Select(item => new { name = item.Key, y = item.Count }).ToList();
+            var medianCostByWaypointCount = costByWaypointCount.OrderBy(item => item.Key).Select(item => new { name = item.Key, y = item.Median }).ToList();
+            var rideCountByWaypointCount = costByWaypointCount.OrderBy(item => item.Key).Select(item => new { name = item.Key, y = item.Count }).ToList();
 
             var totalCostByDate = costByDate.OrderBy(item => item.Key).Select(item => new { name = item.Key.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture), y = item.Sum }).ToList();
             var rideCountByDate = costByDate.OrderBy(item => item.Key).Select(item => new { name = item.Key.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture), y = item.Count }).ToList();

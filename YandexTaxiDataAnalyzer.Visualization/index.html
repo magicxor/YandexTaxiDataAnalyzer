@@ -24,14 +24,9 @@
                 renderAsPieChart('statsVisualization3', 'rideCountByCarModel', json.rideCountByCarModel);
                 renderAsPieChart('statsVisualization4', 'rideCountByCarAndDriver', json.rideCountByCarAndDriver);
 
-                renderAsPieChart('statsVisualization5', 'totalCostByMinutes', json.totalCostByMinutes);
-                renderAsPieChart('statsVisualization6', 'rideCountByMinutes', json.rideCountByMinutes);
-
-                renderAsPieChart('statsVisualization7', 'totalCostByHourOfDay', json.totalCostByHourOfDay);
-                renderAsPieChart('statsVisualization8', 'rideCountByHourOfDay', json.rideCountByHourOfDay);
-
-                renderAsColumnChart('statsVisualization9','medianCostByWaypointCount',json.medianCostByWaypointCount);
-                renderAsPieChart('statsVisualization10', 'rideCountByWaypointCount', json.rideCountByWaypointCount);
+                renderValueAndCountColumnChart('statsVisualizationCostByMinutes', 'totalCostByMinutes', 'rideCountByMinutes', json.totalCostByMinutes, json.rideCountByMinutes);
+                renderValueAndCountColumnChart('statsVisualizationCostByHourOfDay', 'totalCostByHourOfDay', 'rideCountByHourOfDay', json.totalCostByHourOfDay, json.rideCountByHourOfDay);
+                renderValueAndCountColumnChart('statsVisualizationCostByWaypointCount','medianCostByWaypointCount', 'rideCountByWaypointCount', json.medianCostByWaypointCount, json.rideCountByWaypointCount);
 
                 renderAsColumnChart('statsVisualizationCostByDate', 'totalCostByDate', json.totalCostByDate);
                 renderValueAndCountColumnChart('statsVisualizationCostByMonth', 'totalCostByMonth', 'rideCountByMonth', json.totalCostByMonth, json.rideCountByMonth);
