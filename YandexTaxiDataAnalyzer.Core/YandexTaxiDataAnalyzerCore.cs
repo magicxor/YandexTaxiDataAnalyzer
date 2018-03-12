@@ -36,6 +36,7 @@ namespace YandexTaxiDataAnalyzer.Core
             var minutesByCarAndDriver = dataAnalyzer.GetStatistics(data, item => item.ContractorInformation.CarColor + " " + item.ContractorInformation.CarModel + " " + item.ContractorInformation.CarNumber + " " + item.ContractorInformation.Driver, item => item.OrderInformation.Duration.TotalMinutes);
             var costByMinutes = dataAnalyzer.GetStatistics(data, item => item.OrderInformation.Duration.TotalMinutes, item => item.OrderInformation.Cost);
             var costByHourOfDay = dataAnalyzer.GetStatistics(data, item => item.RouteInformation.OrderDateTime.TimeOfDay.Hours, item => item.OrderInformation.Cost);
+            var costByDayOfWeek = dataAnalyzer.GetStatistics(data, item => item.RouteInformation.OrderDateTime.DayOfWeek, item => item.OrderInformation.Cost);
             var costByWaypointCount = dataAnalyzer.GetStatistics(data, item => item.RouteInformation.Waypoints.Count, item => item.OrderInformation.Cost);
 
             var costByDate = dataAnalyzer.GetStatistics(data, item => item.RouteInformation.OrderDateTime.Date, item => item.OrderInformation.Cost);
@@ -75,6 +76,9 @@ namespace YandexTaxiDataAnalyzer.Core
             var totalCostByHourOfDay = costByHourOfDay.OrderBy(item => item.Key).Select(item => new { name = item.Key, y = item.Sum }).ToList();
             var rideCountByHourOfDay = costByHourOfDay.OrderBy(item => item.Key).Select(item => new { name = item.Key, y = item.Count }).ToList();
 
+            var totalCostByDayOfWeek = costByDayOfWeek.OrderBy(item => item.Key).Select(item => new { name = item.Key.ToString(), y = item.Sum }).ToList();
+            var rideCountByDayOfWeek = costByDayOfWeek.OrderBy(item => item.Key).Select(item => new { name = item.Key.ToString(), y = item.Count }).ToList();
+
             var medianCostByWaypointCount = costByWaypointCount.OrderBy(item => item.Key).Select(item => new { name = item.Key, y = item.Median }).ToList();
             var rideCountByWaypointCount = costByWaypointCount.OrderBy(item => item.Key).Select(item => new { name = item.Key, y = item.Count }).ToList();
 
@@ -108,6 +112,8 @@ namespace YandexTaxiDataAnalyzer.Core
                 rideCountByMinutes,
                 totalCostByHourOfDay,
                 rideCountByHourOfDay,
+                totalCostByDayOfWeek,
+                rideCountByDayOfWeek,
                 medianCostByWaypointCount,
                 rideCountByWaypointCount,
                 totalCostByDate,
