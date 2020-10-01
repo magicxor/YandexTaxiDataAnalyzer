@@ -17,11 +17,11 @@ namespace YandexTaxiDataAnalyzerTests
         }
 
         [DataTestMethod]
-        [DataRow("Стоимость поездки — 134 руб.", 134)]
-        [DataRow("Е212АХ138", 212)]
-        [DataRow("8 мин", 8)]
-        [DataRow("улица Ленина, 19/6", 19)]
-        [DataRow("Вы заказали такси 20 февраля 2015 г. в 01:58", 20)]
+        [DataRow("РЎС‚РѕРёРјРѕСЃС‚СЊ РїРѕРµР·РґРєРё вЂ” 134 СЂСѓР±.", 134)]
+        [DataRow("Р•212РђРҐ138", 212)]
+        [DataRow("8 РјРёРЅ", 8)]
+        [DataRow("СѓР»РёС†Р° Р›РµРЅРёРЅР°, 19/6", 19)]
+        [DataRow("Р’С‹ Р·Р°РєР°Р·Р°Р»Рё С‚Р°РєСЃРё 20 С„РµРІСЂР°Р»СЏ 2015 Рі. РІ 01:58", 20)]
         [DataRow("000000001", 1)]
         public void TestGetFirstNumber(string sourceString, int referenceNumber)
         {
@@ -30,20 +30,21 @@ namespace YandexTaxiDataAnalyzerTests
         }
 
         [DataTestMethod]
-        [DataRow(" тёмно-серый Hyundai Solaris ", "тёмно-серый", "Hyundai Solaris")]
-        [DataRow(" белый ГАЗ 31105 «Волга» ", "белый", "ГАЗ 31105 «Волга»")]
-        [DataRow("белый LADA (ВАЗ) Granta", "белый", "LADA (ВАЗ) Granta")]
-        [DataRow(" серо-синий LADA (ВАЗ) Granta ", "серо-синий", "LADA (ВАЗ) Granta")]
-        [DataRow(" чёрный Subaru Legacy ", "чёрный", "Subaru Legacy")]
+        [DataRow(" С‚С‘РјРЅРѕ-СЃРµСЂС‹Р№ Hyundai Solaris ", "С‚С‘РјРЅРѕ-СЃРµСЂС‹Р№", "Hyundai Solaris")]
+        [DataRow(" Р±РµР»С‹Р№ Р“РђР— 31105 В«Р’РѕР»РіР°В» ", "Р±РµР»С‹Р№", "Р“РђР— 31105 В«Р’РѕР»РіР°В»")]
+        [DataRow("Р±РµР»С‹Р№ LADA (Р’РђР—) Granta", "Р±РµР»С‹Р№", "LADA (Р’РђР—) Granta")]
+        [DataRow(" СЃРµСЂРѕ-СЃРёРЅРёР№ LADA (Р’РђР—) Granta ", "СЃРµСЂРѕ-СЃРёРЅРёР№", "LADA (Р’РђР—) Granta")]
+        [DataRow(" С‡С‘СЂРЅС‹Р№ Subaru Legacy ", "С‡С‘СЂРЅС‹Р№", "Subaru Legacy")]
         public void TestGetColorAndModel(string description, string referenceColor, string referenceModel)
         {
-            (var color, var model) = _htmlParserService.GetColorAndModel(description);
+            var (color, model) = _htmlParserService.GetColorAndModel(description);
             Assert.AreEqual(referenceColor, color);
             Assert.AreEqual(referenceModel, model);
         }
 
         [DataTestMethod]
-        [DataRow(TestDataConstants.HtmlMessage, "Стрела", "Сидоров Пётр Иванович", "белый", "Toyota Corolla", "Х228РТ38", "Эконом", 8, 71, new[]{ "Советская улица, 19В", "улица Ленина, 11/5" }, 1499618400)]
+        [DataRow(TestDataConstants.HtmlMessage2018, "РЎС‚СЂРµР»Р°", "РЎРёРґРѕСЂРѕРІ РџС‘С‚СЂ РРІР°РЅРѕРІРёС‡", "Р±РµР»С‹Р№", "Toyota Corolla", "РҐ228Р Рў38", "Р­РєРѕРЅРѕРј", 8, 71, new[]{ "РЎРѕРІРµС‚СЃРєР°СЏ СѓР»РёС†Р°, 19Р’", "СѓР»РёС†Р° Р›РµРЅРёРЅР°, 11/5" }, 1499618400)]
+        [DataRow(TestDataConstants.HtmlMessage2020, "РРџ РћРґР°СЂРёС‡ Р”РјРёС‚СЂРёР№ Р‘РѕСЂРёСЃРѕРІРёС‡", "Р—Р°Р№С†РµРІ РќСѓСЂСЃСѓР»С‚Р°РЅ", "СЂРѕР·РѕРІС‹Р№", "Honda Fit", "Рђ878РђРњ126", "Р­РєРѕРЅРѕРј", 4, 184, new[] { "СѓР»РёС†Р° РЎРµРґРѕРІР°, 34Р‘", "СѓР»РёС†Р° Р›РµРЅРёРЅР°, 11/3" }, 1601395200)]
         public void TestParseHtmlMessage(string htmlMessage, 
             string referenceCompany, 
             string referenceDriver, 

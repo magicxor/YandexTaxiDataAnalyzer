@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using AngleSharp.Dom;
-using AngleSharp.Parser.Html;
+using AngleSharp.Html.Parser;
 using YandexTaxiDataAnalyzer.Core.Exceptions;
 using YandexTaxiDataAnalyzer.Core.Extensions;
 using YandexTaxiDataAnalyzer.Core.Models;
@@ -93,7 +93,7 @@ namespace YandexTaxiDataAnalyzer.Core.Services
                 var cols2 = rows[2].QuerySelectorAll("td");
                 if (cols1.Length == 3 && cols2.Length == 3)
                 {
-                    (var color, var model) = GetColorAndModel(cols1[2].TrimmedText());
+                    var (color, model) = GetColorAndModel(cols1[2].TrimmedText());
                     return new ContractorInformation()
                     {
                         Company = cols1[0].TrimmedText(),
@@ -118,7 +118,7 @@ namespace YandexTaxiDataAnalyzer.Core.Services
         {
             var rows = routeTable.QuerySelectorAll("tr");
 
-            var russianCulture = CultureInfo.CreateSpecificCulture("ru-RU");
+            var russianCulture = CultureInfo.GetCultureInfo("ru-RU").DateTimeFormat;
 
             var waypoints = new List<string>();
             var orderDateTime = DateTime.MinValue;
@@ -175,7 +175,7 @@ namespace YandexTaxiDataAnalyzer.Core.Services
             foreach (var htmlMessage in htmlMessages)
             {
                 var parser = new HtmlParser();
-                var document = parser.Parse(htmlMessage);
+                var document = parser.ParseDocument(htmlMessage);
                 var tables = document.QuerySelectorAll("table");
                 var contractorTable = tables.FirstOrDefault(x => !x.InnerHtml.Contains("<table") && (x.InnerHtml.Contains("Партнёр") || x.InnerHtml.Contains("Таксопарк")) && x.InnerHtml.Contains("Водитель") && x.InnerHtml.Contains("Автомобиль"));
                 var orderTable = tables.FirstOrDefault(x => !x.InnerHtml.Contains("<table") && x.InnerHtml.Contains("Тариф") && x.InnerHtml.Contains("Стоимость"));

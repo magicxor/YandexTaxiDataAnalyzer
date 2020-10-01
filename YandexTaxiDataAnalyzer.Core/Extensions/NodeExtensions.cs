@@ -1,5 +1,4 @@
 ﻿using AngleSharp.Dom;
-using AngleSharp.Extensions;
 
 namespace YandexTaxiDataAnalyzer.Core.Extensions
 {
